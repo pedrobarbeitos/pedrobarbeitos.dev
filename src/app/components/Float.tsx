@@ -1,13 +1,12 @@
-
 'use client';
 import React, { useEffect, useRef } from 'react';
-import './Float.scss'
+import './Float.scss';
 
 type Props = {};
 
 const Float: React.FC<Props> = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imgRef = useRef<HTMLImageElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const imgRef = useRef<HTMLImageElement | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -19,6 +18,10 @@ const Float: React.FC<Props> = () => {
 
     const ctx = canvas.getContext('2d');
 
+    if (!ctx) {
+      return;
+    }
+
     function mix(a: number, b: number, l: number) {
       return a + (b - a) * l;
     }
@@ -29,26 +32,38 @@ const Float: React.FC<Props> = () => {
 
     function render(time: number) {
       time *= 0.001;
+      const { width: canvasWidth, height: canvasHeight } = resize(canvas!);
+      ctx!.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      resize(canvas);
+      let imgAspectRatio = img!.width / img!.height;
+      let drawWidth = canvasWidth;
+      let drawHeight = canvasWidth / imgAspectRatio;
+
+      if (drawHeight < canvasHeight) {
+        drawHeight = canvasHeight;
+        drawWidth = canvasHeight * imgAspectRatio;
+      }
+
+      const xOffset = (canvasWidth - drawWidth) / 2;
 
       var t1 = time;
-      var t2 = time * 0.8;
+      var t2 = time * 0.5;
 
-      for (var dstY = 0; dstY < canvas.height; ++dstY) {
-        var v = dstY / canvas.height;
-        var off1 = Math.sin((v + 0.5) * mix(3, 12, upDown(t1))) * 100;
-        var off2 = Math.sin((v + 0.5) * mix(3, 12, upDown(t2))) * 100;
+      const heightDiff = drawHeight - canvasHeight;
+
+      for (var dstY = 0; dstY < canvasHeight; ++dstY) {
+        var v = dstY / canvasHeight;
+        var off1 = Math.sin((v + 0.5) * mix(3, 12, upDown(t1))) * 0;
+        var off2 = Math.sin((v + 0.5) * mix(3, 12, upDown(t2))) * 30;
         var off = off1 + off2;
 
-        var srcY = dstY * img.height / canvas.height + off;
+        var srcY = (dstY + heightDiff) * img!.height / drawHeight + off;
+        srcY = Math.max(0, Math.min(img!.height - 5, srcY));
 
-        srcY = Math.max(0, Math.min(img.height - 1, srcY));
-
-        ctx.drawImage(
-          img,
-          0, srcY, img.width, 1,
-          0, dstY, canvas.width, 1
+        ctx!.drawImage(
+          img!,
+          0, srcY, img!.width, 1,
+          xOffset, dstY, drawWidth, 1  
         );
       }
 
@@ -67,16 +82,18 @@ const Float: React.FC<Props> = () => {
       canvas.width = width;
       canvas.height = height;
     }
+
+    return { width, height };
   }
 
   return (
     <div>
       <canvas className='canvas' ref={canvasRef}></canvas>
       <img
-        className='image'
         ref={imgRef}
         src={'/profile.jpg'}
         alt=''
+        style={{ display: 'none' }} // Hide the image element
       />
     </div>
   );
