@@ -8,6 +8,16 @@ html,
 body {
     max-width: 100vw;
     overflow-x: hidden;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
+}
+
+h1 {
+    font-size: 50px;
+    font-weight: 900;
+}
+
+h2 {
+    font-size: 15px;
+    font-weight: 200;
 }

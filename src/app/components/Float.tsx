@@ -78,14 +78,14 @@ const Float: React.FC<Props> = () => {
 
   return (
     <div>
-      <canvas className='canvas' ref={canvasRef}>
-      <img
-        className='image'
-        ref={imgRef}
-        src={'/profile.jpg'}
-        alt=''
-      />
-      </canvas>
+        <canvas className='canvas' ref={canvasRef}>
+            <img
+            className='image'
+            ref={imgRef}
+            src={'/profile.jpg'}
+            alt=''
+            />
+        </canvas>
     </div>
   );
 };
