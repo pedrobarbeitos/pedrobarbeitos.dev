@@ -11,6 +11,7 @@ function Navbar({}: Props) {
             <Link href='/'>pedro barbeitos</Link>
         </div>
         <div className='navbarRight'>
+            <Link href=''>about</Link>
             <Link href=''>work</Link>
             <Link href=''>contact</Link>
         </div>
