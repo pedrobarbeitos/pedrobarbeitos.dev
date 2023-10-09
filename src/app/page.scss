@@ -1,30 +1,25 @@
-.container {
-    width: 100vw; 
-    height: 100vh;
+
+.containerMain {
+    width: 100%;
+    height: 100%;
+    padding: 20px 30px 10px 30px;
+    z-index: 1;
     background-color: transparent;
     position: absolute;
-    z-index: 2;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-between;
     color: white;
-    text-align: center;
-}
-
-.strike {
-    font-size: 100px;
-    font-weight: 700px;
     
 }
 
-.arrow {
-    font-size: 50px;
-    font-weight: 700px;    
+.containerText {
+    border-top: 1px solid;
+    padding-top: 15px;
 }
 
 .test {
     position: relative;
     height: 1800px;
-    font-size: 40px;
+    
 }

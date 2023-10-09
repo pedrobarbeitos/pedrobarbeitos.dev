@@ -27,7 +27,7 @@ const Float: React.FC<Props> = () => {
     }
 
     function upDown(v: number) {
-      return Math.sin(v) * 0.5 + 0.5;
+      return Math.sin(v) * 0.5 + 0.1;
     }
 
     function render(time: number) {
@@ -87,7 +87,7 @@ const Float: React.FC<Props> = () => {
   }
 
   return (
-    <div>
+    <div className='containerCanvas'>
       <canvas className='canvas' ref={canvasRef}></canvas>
       <img
         ref={imgRef}
