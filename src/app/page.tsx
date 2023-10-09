@@ -8,7 +8,7 @@ export default function Home() {
       <div className="containerMain">
         <Navbar/>
         <h1 className="containerText">
-          <p>Hi. I'm an <b>architect</b> and <b>web developer</b></p> 
+          <p>Hi. I&apos;m an <b>architect</b> and <b>web developer</b></p> 
           <p>creating physical and digital places</p>
         </h1>
       </div>
