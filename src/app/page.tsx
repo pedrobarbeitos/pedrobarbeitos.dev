@@ -9,9 +9,9 @@ export default function Home() {
         <Navbar/>
         <h1 className="containerText">
           <p>Hi. I&apos;m an <b>architect</b> and <b>web developer</b></p> 
-          <p>creating physical and digital places</p>
         </h1>
       </div>
+      <Float/>
       <Float/>
       <div className="test"> TEST </div>
     </div>
